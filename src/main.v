@@ -35,7 +35,29 @@ fn main() {
 	for i < args.len 
 	{
 		current := args[i]
-		if (current == "-o" || current == "--output") && i + 1 < args.len {
+		if current == "-h" || current == "--help" {
+			eprintln('Usage: objbinpack [OPTIONS] [VARNAME=]FILE...
+Puts multiple text/binary files into a linkable C/C++ object file.
+
+Options: 
+  -h, --help                    Display this help
+  -o FILE, --output FILE        Where to place the output file
+  -l LANG, --language LANG      Which language to use as intermediate language and resulting linkable object
+  [VARNAME=]FILE                Input file path, can be specified multiple times.
+                                Variable name is optional, if not specified, will use transformed file name.
+
+Environment Variables:
+  CC=C_COMPILER                 Custom C compiler, by default uses gcc
+  CXX=CPP_COMPILER              Custom C++ compiler, by default uses g++
+  OFLAGS=FLAGS                  Additional compilation flags
+
+Supported Languages:
+  c                             C language, uses "VARNAME_data" and "VARNAME_length" syntax
+  cpp                           C++ language, uses VARNAME::data and "VARNAME::length" syntax
+')
+			exit(0)
+		}
+		else if (current == "-o" || current == "--output") && i + 1 < args.len {
 			info.out_path = args[i + 1]
 			i++
 		}
@@ -84,6 +106,11 @@ fn main() {
 	}
 
 	info.cflags = os.getenv_opt("OFLAGS") or { "" }
+
+	if info.inputs.len <= 0 {
+		eprint("objbinpack: fatal error: no input files")
+		exit(1)
+	}
 
 	match info.language.to_lower() {
 		"cpp" {
