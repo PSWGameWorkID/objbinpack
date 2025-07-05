@@ -1,7 +1,7 @@
 VC := v
 PREFIX := /usr/local/bin
 
-.PHONY: all build install
+.PHONY: all install
 
 all: build/objbinpack
 
