@@ -25,7 +25,7 @@ fn (mut this MakerCPP) process(states States)
 	this.cxx = os.find_abs_path_of_executable(this.cxx) or { os.abs_path(this.cxx) }
 	mut process := os.new_process(this.cxx)
 	oflags := parse_oflags(states.cflags)
-	mut args := ["-o", states.out_path, "-x", "c", "-c", "-"]
+	mut args := ["-o", states.out_path, "-x", "cpp", "-c", "-"]
 	args << oflags
 
 	process.set_args(args)
