@@ -26,7 +26,7 @@ fn (mut this MakerC) process(states States)
 	mut process := os.new_process(this.cc)
 	oflags := parse_oflags(states.cflags)
 	mut args := ["-o", states.out_path, "-x", "c", "-c", "-"]
-	args << oflags.data
+	args << oflags
 	
 	process.set_args(args)
 	process.set_redirect_stdio()
