@@ -10,7 +10,8 @@ objbinpack -o (OUTPUT) -l (LANGUAGE) [varname=]path/to/file.ext [[varname2]=path
 objbinpack -o main.o -l cpp file.vert frag_file=file.frag
 ```
 
-### Flags
+### Arguments
+- `-h` = Show help
 - `-o path/to/output.o` = Output File
 - `-l language` = Intermediate language before compilation
 - `[varname=]path/to/file.ext` = Path to the file, with optional variable 
@@ -66,4 +67,4 @@ A testing tool to dump stdin file to `stdio.in` file. You can plug the
 executable as `CXX` or `CC` and it will dump the generated source code.
 
 ## License
-GNU General Public License v3 ( GPLv3 ), see [LICENSE](LICENSE)
+All part of the project is under `GNU General Public License 3.0` unless specified otherwise, see [LICENSE](LICENSE)
