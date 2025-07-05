@@ -122,8 +122,7 @@ Supported Languages:
 			c.process(info)
 		}
 		else {
-			error("Unknown language : ${info.language}")
-			exit(1)
+			panic("Unknown language : ${info.language}")
 		}
 	}
 }
